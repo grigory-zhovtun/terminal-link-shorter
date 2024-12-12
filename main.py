@@ -16,16 +16,16 @@ def shorten_link(token, link):
     response = requests.get(url, params=params)
     response.raise_for_status()
 
-    response_data = response.json()
+    response_with_short_url = response.json()
 
-    if 'error' in response_data:
-        err = response_data['error']['error_msg']
+    if 'error' in response_with_short_url:
+        err = response_with_short_url['error']['error_msg']
         raise requests.exceptions.HTTPError(err)
 
-    if 'response' not in response_data or 'short_url' not in response_data['response']:
+    if 'response' not in response_with_short_url or 'short_url' not in response_with_short_url['response']:
         raise requests.exceptions.HTTPError('Response not found.')
 
-    return response_data['response']['short_url']
+    return response_with_short_url['response']['short_url']
 
 def count_clicks(token, link):
     api_version = "5.131"
@@ -42,17 +42,17 @@ def count_clicks(token, link):
     response = requests.get(url, params=params)
     response.raise_for_status()
 
-    response_data = response.json()
+    response_with_link_statistics = response.json()
 
-    if 'error' in response_data:
-        err = response_data['error']['error_msg']
+    if 'error' in response_with_link_statistics:
+        err = response_with_link_statistics['error']['error_msg']
         raise requests.exceptions.HTTPError(err)
 
-    if 'response' not in response_data:
+    if 'response' not in response_with_link_statistics:
         raise requests.exceptions.HTTPError('Response not found.')
 
-    if len(response_data['response']['stats']) > 0:
-        return response_data['response']['stats'][0]['views']
+    if len(response_with_link_statistics['response']['stats']) > 0:
+        return response_with_link_statistics['response']['stats'][0]['views']
     else:
         return 0
 
