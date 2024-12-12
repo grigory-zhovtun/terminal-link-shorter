@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 import sys
 
+
 def shorten_link(token, link):
     api_version = "5.131"
     url = 'https://api.vk.ru/method/utils.getShortLink'
@@ -27,6 +28,7 @@ def shorten_link(token, link):
         raise requests.exceptions.HTTPError('Response not found.')
 
     return short_url['response']['short_url']
+
 
 def count_clicks(token, link):
     api_version = "5.131"
@@ -57,6 +59,7 @@ def count_clicks(token, link):
     else:
         return 0
 
+
 def is_shorten_link(token, url):
     api_version = "5.131"
     parsed_url = urlparse(url)
@@ -86,6 +89,7 @@ def is_shorten_link(token, url):
     else:
         return True
 
+
 if __name__ == '__main__':
     load_dotenv()
     token = os.environ['VK_API_TOKEN']
@@ -95,14 +99,17 @@ if __name__ == '__main__':
         try:
             clicks_count = count_clicks(token, user_input)
         except requests.exceptions.HTTPError as e:
-            sys.exit("Can't get clicks count for url '{}': {}".format(user_input, e))
+            sys.exit(
+                "Can't get clicks count for url '{}': {}".format(user_input, e)
+                     )
 
         print(clicks_count)
     else:
         try:
             short_link = shorten_link(token, user_input)
         except requests.exceptions.HTTPError as e:
-            sys.exit("Can't get shorten link for url '{}': {}".format(user_input, e))
+            sys.exit(
+                "Can't get shorten link for url '{}': {}".format(user_input, e)
+            )
 
         print('Shorted link: ', short_link)
-
