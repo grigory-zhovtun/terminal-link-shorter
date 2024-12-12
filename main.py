@@ -1,14 +1,11 @@
 import requests
-from urllib.parse import urljoin, urlsplit, urlparse
+from urllib.parse import urlsplit, urlparse
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
 def shorten_link(token, link):
     api_version = "5.131"
-    api = 'utils.getShortLink'
-    url = urljoin('https://api.vk.ru/method/', api)
+    url = 'https://api.vk.ru/method/utils.getShortLink'
 
     params = {
         "access_token": token,
@@ -32,8 +29,7 @@ def shorten_link(token, link):
 
 def count_clicks(token, link):
     api_version = "5.131"
-    api = 'utils.getLinkStats'
-    url = urljoin('https://api.vk.ru/method/', api)
+    url = 'https://api.vk.ru/method/utils.getLinkStats'
 
     key = urlsplit(link).path[1:] # get only path (example: https://vk.cc/aCog35 -> /aCog35 [1:] -> aCog35)
 
@@ -65,7 +61,7 @@ def is_shorten_link(url):
     return parsed.netloc == 'vk.cc'
 
 if __name__ == '__main__':
-
+    load_dotenv()
     token = os.getenv('TOKEN')
     user_input = input('Enter link: ')
 
