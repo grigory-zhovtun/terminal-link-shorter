@@ -88,7 +88,7 @@ def is_shorten_link(token, url):
 
 if __name__ == '__main__':
     load_dotenv()
-    token = os.getenv('TOKEN')
+    token = os.environ['VK_API_TOKEN']
     user_input = input('Enter link: ')
 
     if is_shorten_link(token, user_input):
