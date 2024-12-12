@@ -56,16 +56,42 @@ def count_clicks(token, link):
     else:
         return 0
 
-def is_shorten_link(url):
-    parsed = urlparse(url)
-    return parsed.netloc == 'vk.cc'
+
+def is_shorten_link(token, url):
+    api_version = "5.131"
+    parsed_url = urlparse(url)
+    domain = parsed_url.netloc.lower()
+
+    if domain != "vk.cc" or not parsed_url.path.strip("/"):
+        return False
+
+    key = parsed_url.path.strip("/")
+
+    method_url = "https://api.vk.com/method/utils.getLinkStats"
+    params = {
+        "access_token": token,
+        "v": api_version,
+        "key": key
+    }
+
+    response = requests.get(method_url, params=params).json()
+
+    if "error" in response:
+        error_code = response["error"].get("error_code")
+
+        if error_code == 7:
+            return True
+        else:
+            return False
+    else:
+        return True
 
 if __name__ == '__main__':
     load_dotenv()
     token = os.getenv('TOKEN')
     user_input = input('Enter link: ')
 
-    if is_shorten_link(user_input):
+    if is_shorten_link(token, user_input):
         try:
             clicks_count = count_clicks(token, user_input)
         except requests.exceptions.HTTPError as e:
@@ -78,5 +104,5 @@ if __name__ == '__main__':
         except requests.exceptions.HTTPError as e:
             exit("Can't get shorten link for url '{}': {}".format(user_input, e))
 
-        print('Сокращенная ссылка: ', short_link)
+        print('Shorted link: ', short_link)
 
