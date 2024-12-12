@@ -31,7 +31,7 @@ def count_clicks(token, link):
     api_version = "5.131"
     url = 'https://api.vk.ru/method/utils.getLinkStats'
 
-    key = urlsplit(link).path[1:] # get only path (example: https://vk.cc/aCog35 -> /aCog35 [1:] -> aCog35)
+    key = urlsplit(link).path[1:]
 
     params = {
         "access_token": token,
