@@ -3,6 +3,7 @@ from urllib.parse import urlsplit, urlparse
 from dotenv import load_dotenv
 import os
 import sys
+import argparse
 
 
 def shorten_link(token, link):
@@ -93,7 +94,12 @@ def is_shorten_link(token, url):
 if __name__ == '__main__':
     load_dotenv()
     token = os.environ['VK_API_TOKEN']
-    user_input = input('Enter link: ')
+    #user_input = input('Enter link: ')
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('link', nargs=argparse.REMAINDER)
+    args = parser.parse_args()
+    user_input = args.link[0]
 
     if is_shorten_link(token, user_input):
         try:
@@ -103,7 +109,7 @@ if __name__ == '__main__':
                 "Can't get clicks count for url '{}': {}".format(user_input, e)
                      )
 
-        print(clicks_count)
+        print(f'Your link was clicked {clicks_count} times')
     else:
         try:
             short_link = shorten_link(token, user_input)
