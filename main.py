@@ -97,9 +97,10 @@ if __name__ == '__main__':
     #user_input = input('Enter link: ')
 
     parser = argparse.ArgumentParser(description='This program changes your link to shorten it and shows you how many clicks.')
-    parser.add_argument('link', nargs=argparse.REMAINDER)
+    parser.add_argument('link', help="Write link")
     args = parser.parse_args()
-    user_input = args.link[0]
+    if args.link:
+        user_input = args.link[0]
 
     if is_shorten_link(token, user_input):
         try:
