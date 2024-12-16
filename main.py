@@ -96,7 +96,7 @@ if __name__ == '__main__':
     token = os.environ['VK_API_TOKEN']
     #user_input = input('Enter link: ')
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='This program changes your link to shorten it and shows you how many clicks.')
     parser.add_argument('link', nargs=argparse.REMAINDER)
     args = parser.parse_args()
     user_input = args.link[0]
