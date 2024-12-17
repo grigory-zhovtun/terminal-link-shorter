@@ -45,10 +45,8 @@ Create a .env file in the root directory of the project and add your VK API toke
    python main.py <url>
    ```
  ```
-(.venv) (base) grigoriizhovtun@Grigoriis-MacBook-Air terminal-link-shorter % python main.py https://google.com  
+(.venv) (base) % python main.py https://google.com  
 Shorted link:  https://vk.cc/c8PCB4
-(.venv) (base) grigoriizhovtun@Grigoriis-MacBook-Air terminal-link-shorter % python main.py https://vk.cc/c8PCB4
+(.venv) (base) % python main.py https://vk.cc/c8PCB4
 Your link was clicked 0 times
-(.venv) (base) grigoriizhovtun@Grigoriis-MacBook-Air terminal-link-shorter % 
-
 ```
