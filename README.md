@@ -40,6 +40,8 @@ Create a .env file in the root directory of the project and add your VK API toke
 ```TOKEN=your_vk_api_token```
 
 
-5. **Run the script:**
+5. **Usage:**
    ```bash
-   python main.py
+   python main.py <url>
+   ```
+   ![img_1.png](img_1.png)

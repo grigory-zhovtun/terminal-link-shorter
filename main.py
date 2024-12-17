@@ -94,13 +94,14 @@ def is_shorten_link(token, url):
 if __name__ == '__main__':
     load_dotenv()
     token = os.environ['VK_API_TOKEN']
-    #user_input = input('Enter link: ')
 
     parser = argparse.ArgumentParser(description='This program changes your link to shorten it and shows you how many clicks.')
     parser.add_argument('link', help="Write link")
     args = parser.parse_args()
+    user_input = ''
+
     if args.link:
-        user_input = args.link[0]
+        user_input = args.link
 
     if is_shorten_link(token, user_input):
         try:
