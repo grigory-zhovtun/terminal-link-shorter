@@ -36,8 +36,16 @@ This ensures consistent and tested versions of the packages.
    pip install -r requirements.txt
    
 4. **Configure environment variables:**
-Create a .env file in the root directory of the project and add your VK API token:
-```TOKEN=your_vk_api_token```
+Before running this application, you need to properly configure your environment variables. This is done by creating a `.env` file in the project root directory (the same directory where you run the script) and defining the required variables.
+
+   Required Environment Variables
+   
+   - **VK_API_TOKEN**  
+     *Type:* String  
+     *Description:* This variable holds your VK API token, which grants you access to VK's URL shortening and link statistics methods. Without a valid token, the program will not be able to shorten links or retrieve click counts.  
+     *Example:*  
+     ```env
+     VK_API_TOKEN=your_vk_api_access_token_here
 
 
 5. **Usage:**
